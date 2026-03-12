@@ -16,3 +16,7 @@ script = """#!/bin/sh
 set -e
 cog verify --file $1
 """
+
+[monorepo.packages]
+gateway = { path = "gateway" }
+argocd-httproute = { path = "argocd-httproute" }
