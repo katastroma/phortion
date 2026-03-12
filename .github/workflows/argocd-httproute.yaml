@@ -1,10 +1,10 @@
-name: Release Gateway Chart
+name: Release ArgoCD HTTPRoute Chart
 
 on:
   push:
     branches: [default]
     paths:
-      - gateway/**
+      - argocd-httproute/**
 
 env:
   REGISTRY: oci://ghcr.io/katastroma-platform/phortion
@@ -33,7 +33,7 @@ jobs:
       - name: Package Chart
         env:
           VERSION: ${{ steps.release.outputs.version }}
-        run: helm package --version ${{ env.VERSION }} gateway
+        run: helm package --version ${{ env.VERSION }} argocd-httproute
 
       - name: Login to Registry
         run: |
@@ -43,7 +43,7 @@ jobs:
       - name: Push Chart
         env:
           VERSION: ${{ steps.release.outputs.version }}
-        run: helm push gateway-${{ env.VERSION }}.tgz ${{ env.REGISTRY }}
+        run: helm push argocd-httproute-${{ env.VERSION }}.tgz ${{ env.REGISTRY }}
 
       - name: Push bump commit and release tag
         run: git push --follow-tags

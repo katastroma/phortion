@@ -1,4 +1,4 @@
 apiVersion: v2
-name: argocd-gateway
+name: argocd-httproute
 description: Expose ArgoCD through the gateway
-version: 0.1.0
+version: 0.0.0
