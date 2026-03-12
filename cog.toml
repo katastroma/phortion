@@ -1,0 +1,10 @@
+from_latest_tag = false
+
+# [git_hooks]
+
+[git_hooks.commit-msg]
+script = """#!/bin/sh
+set -e
+cog verify --file $1
+cog check
+"""

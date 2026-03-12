@@ -1,0 +1,4 @@
+apiVersion: v2
+name: gateway
+description: Gateway resources for cluster services
+version: 0.1.0

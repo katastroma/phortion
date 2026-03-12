@@ -1,0 +1,12 @@
+gateway:
+  name: default
+  namespace: gateway-system
+  className: traefik
+
+ports:
+  web: 8000
+  websecure: 8443
+
+domain:
+  external: ""
+  internal: localhost

@@ -1,0 +1,14 @@
+name: argocd-gateway
+
+argocd:
+  ref:
+    name: argocd-server
+    port: 80
+
+gateway_system:
+  name: default
+  namespace: gateway-system
+
+ingress:
+  subdomain: argocd
+  domain: localhost

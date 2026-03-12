@@ -1,0 +1,34 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: {{ .Values.gateway.name }}
+  namespace: {{ .Values.gateway.namespace }}
+spec:
+  gatewayClassName: {{ .Values.gateway.className }}
+  listeners:
+    {{- if .Values.domain.internal }}
+    - name: internal
+      port: {{ .Values.ports.websecure }}
+      protocol: HTTPS
+      hostname: "*.{{ .Values.domain.internal }}"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: {{ .Values.domain.internal }}-tls
+    {{- end }}
+    {{- if .Values.domain.external }}
+    - name: external
+      port: {{ .Values.ports.websecure }}
+      protocol: HTTPS
+      hostname: "*.{{ .Values.domain.external }}"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: {{ .Values.domain.external }}-tls
+    {{- end }}
