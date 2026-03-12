@@ -5,6 +5,7 @@ on:
   push:
     branches: [default]
     paths:
+      - .github/workflows/gateway.yaml
       - argocd-httproute/**
 
 env:
