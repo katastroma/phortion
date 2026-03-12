@@ -1,6 +1,7 @@
 name: Release ArgoCD HTTPRoute Chart
 
 on:
+  workflow_dispatch:
   push:
     branches: [default]
     paths:
