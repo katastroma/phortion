@@ -12,6 +12,9 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
+    concurrency:
+      cancel-in-progress: false
+      group: release-charts
     permissions:
       packages: write
       contents: write
