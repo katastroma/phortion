@@ -1,0 +1,60 @@
+name: Release Chart
+description: Bump version, package, and publish a Helm chart to GHCR
+
+inputs:
+  chart:
+    description: Chart directory name (e.g., gateway, argocd-httproute)
+    required: true
+
+outputs:
+  version:
+    description: The bumped version
+    value: ${{ steps.version.outputs.version }}
+
+runs:
+  using: composite
+  steps:
+    - name: Configure git
+      shell: bash
+      run: |
+        git config user.name '${{ github.actor }}'
+        git config user.email '${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com'
+
+    - name: Setup mise
+      shell: bash
+      run: |
+        curl https://mise.run | sh
+        echo "$HOME/.local/share/mise/bin" >> $GITHUB_PATH
+        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
+        mise install
+
+    - name: Version Bump
+      id: version
+      shell: bash
+      run: |
+        cog bump --auto --package ${{ inputs.chart }}
+        VERSION=$(cog get-version --package ${{ inputs.chart }})
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Package Chart
+      shell: bash
+      run: helm package --version ${{ steps.version.outputs.version }} ${{ inputs.chart }}
+
+    - name: Login to Registry
+      shell: bash
+      run: |
+        echo "${{ github.token }}" | \
+        helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Push Chart
+      shell: bash
+      run: |
+        helm push \
+          ${{ inputs.chart }}-${{ steps.version.outputs.version }}.tgz \
+          oci://ghcr.io/katastroma-platform/phortion
+
+    - name: Push bump commit and release tag
+      shell: bash
+      run: |
+        git pull --rebase
+        git push --follow-tags

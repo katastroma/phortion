@@ -8,9 +8,6 @@ on:
       - .github/workflows/gateway.yaml
       - gateway/**
 
-env:
-  REGISTRY: oci://ghcr.io/katastroma-platform/phortion
-
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -26,39 +23,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Configure git
-        run: |
-          git config user.name '${{ github.actor }}'
-          git config user.email '${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com'
-
-      - name: Setup mise
-        run: |
-          curl https://mise.run | sh
-          echo "$HOME/.local/share/mise/bin" >> $GITHUB_PATH
-          echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
-          mise install
-
-      - name: Version Bump
-        id: release
-        run: |
-          cog bump --auto --package gateway
-          VERSION=$(cog get-version --package gateway)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Package Chart
-        env:
-          VERSION: ${{ steps.release.outputs.version }}
-        run: helm package --version ${{ env.VERSION }} gateway
-
-      - name: Login to Registry
-        run: |
-          echo "${{ github.token }}" | \
-          helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      - name: Push Chart
-        env:
-          VERSION: ${{ steps.release.outputs.version }}
-        run: helm push gateway-${{ env.VERSION }}.tgz ${{ env.REGISTRY }}
-
-      - name: Push bump commit and release tag
-        run: git push --follow-tags
+      - name: Release Chart
+        uses: ./.github/actions/release-chart
+        with:
+          chart: gateway
+          token: ${{ github.token }}
+          actor: ${{ github.actor }}
