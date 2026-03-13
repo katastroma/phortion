@@ -26,12 +26,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Configure git
+        run: |
+          git config user.name '${{ github.actor }}'
+          git config user.email '${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com'
+
       - name: Setup mise
-        uses: jdx/mise-action@v3
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/share/mise/bin" >> $GITHUB_PATH
+          mise install
 
       - name: Version Bump
         id: release
-        run: cog bump --auto --package gateway
+        run: |
+          cog bump --auto --package gateway
+          VERSION=$(cog get-version --package gateway)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Package Chart
         env:

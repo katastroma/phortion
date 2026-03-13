@@ -1,5 +1,8 @@
 from_latest_tag = false
 
+[commit_types.ci]
+bump_patch = true
+
 [commit_types.perf]
 bump_patch = true
 
