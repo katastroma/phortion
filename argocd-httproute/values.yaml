@@ -1,4 +1,4 @@
-name: argocd-gateway
+name: argocd-httproute
 
 argocd:
   ref:

@@ -17,7 +17,9 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: {{ .Values.domain.internal }}-tls
+          - group: ''
+            kind: Secret
+            name: {{ .Values.domain.internal }}-tls
     {{- end }}
     {{- if .Values.domain.external }}
     - name: external
@@ -30,5 +32,7 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - name: {{ .Values.domain.external }}-tls
+          - group: ''
+            kind: Secret
+            name: {{ .Values.domain.external }}-tls
     {{- end }}

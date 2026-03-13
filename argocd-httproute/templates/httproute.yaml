@@ -5,13 +5,22 @@ metadata:
   name: {{ .Values.name }}
 spec:
   parentRefs:
-    - name: {{ .Values.gateway_system.name }}
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: {{ .Values.gateway_system.name }}
       namespace: {{ .Values.gateway_system.namespace }}
       sectionName: internal
   hostnames:
     - {{ .Values.ingress.subdomain }}.{{ .Values.ingress.domain }}
   rules:
     - backendRefs:
-      - name: {{.Values.argocd.ref.name }}
+      - group: ''
+        kind: Service
+        name: {{ .Values.argocd.ref.name }}
         port: {{ .Values.argocd.ref.port }}
+        weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 {{- end }}
