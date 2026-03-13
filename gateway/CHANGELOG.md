@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## gateway-0.0.1 - 2026-03-13
+#### Continuous Integration
+- implement initial helm chart releases - (2294f05) - Nathan Blair
+#### Miscellaneous Chores
+- (**version**) gateway-0.0.1 - (7b7e89e) - nathanblair
+- initial commit - (59e3df3) - Nathan Blair
+
+- - -
+
 ## gateway-0.0.1 - 2026-03-12
 #### Continuous Integration
 - implement initial helm chart releases - (2294f05) - Nathan Blair
