@@ -6,11 +6,11 @@ metadata:
 spec:
   gatewayClassName: {{ .Values.gateway.className }}
   listeners:
-    {{- if .Values.domain.internal }}
+    {{- if .Values.global.domain.internal }}
     - name: internal
       port: {{ .Values.ports.websecure }}
       protocol: HTTPS
-      hostname: "*.{{ .Values.domain.internal }}"
+      hostname: "*.{{ .Values.global.domain.internal }}"
       allowedRoutes:
         namespaces:
           from: All
@@ -19,13 +19,13 @@ spec:
         certificateRefs:
           - group: ''
             kind: Secret
-            name: {{ .Values.domain.internal }}-tls
+            name: {{ .Values.global.domain.internal }}-tls
     {{- end }}
-    {{- if .Values.domain.external }}
+    {{- if .Values.global.domain.external }}
     - name: external
       port: {{ .Values.ports.websecure }}
       protocol: HTTPS
-      hostname: "*.{{ .Values.domain.external }}"
+      hostname: "*.{{ .Values.global.domain.external }}"
       allowedRoutes:
         namespaces:
           from: All
@@ -34,5 +34,5 @@ spec:
         certificateRefs:
           - group: ''
             kind: Secret
-            name: {{ .Values.domain.external }}-tls
+            name: {{ .Values.global.domain.external }}-tls
     {{- end }}

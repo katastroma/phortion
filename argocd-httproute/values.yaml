@@ -1,9 +1,9 @@
 name: argocd-httproute
 
-argocd:
-  ref:
-    name: argocd-server
-    port: 80
+global:
+  domain:
+    internal: localhost
+    external: ''
 
 gateway_system:
   name: default
@@ -11,6 +11,8 @@ gateway_system:
 
 ingress:
   subdomain: argocd
-  domain:
-    internal: localhost
-    external: ''
+
+argocd:
+  ref:
+    name: argocd-server
+    port: 80
