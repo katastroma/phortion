@@ -11,4 +11,6 @@ gateway_system:
 
 ingress:
   subdomain: argocd
-  domain: localhost
+  domain:
+    internal: localhost
+    external: ''

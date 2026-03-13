@@ -1,17 +1,31 @@
-{{- if .Values.ingress.domain }}
+{{- if or .Values.ingress.domain.internal .Values.ingress.domain.external }}
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: {{ .Values.name }}
 spec:
   parentRefs:
+    {{- if .Values.ingress.domain.internal }}
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: {{ .Values.gateway_system.name }}
       namespace: {{ .Values.gateway_system.namespace }}
       sectionName: internal
+    {{- end }}
+    {{- if .Values.ingress.domain.external }}
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: {{ .Values.gateway_system.name }}
+      namespace: {{ .Values.gateway_system.namespace }}
+      sectionName: external
+    {{- end }}
   hostnames:
-    - {{ .Values.ingress.subdomain }}.{{ .Values.ingress.domain }}
+    {{- if .Values.ingress.domain.internal }}
+    - {{ .Values.ingress.subdomain }}.{{ .Values.ingress.domain.internal }}
+    {{- end }}
+    {{- if .Values.ingress.domain.external }}
+    - {{ .Values.ingress.subdomain }}.{{ .Values.ingress.domain.external }}
+    {{- end }}
   rules:
     - backendRefs:
       - group: ''
