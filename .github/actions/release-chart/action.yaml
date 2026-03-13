@@ -14,6 +14,10 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Pull any changes
+      shell: bash
+      run: git pull --rebase
+
     - name: Configure git
       shell: bash
       run: |
@@ -55,6 +59,4 @@ runs:
 
     - name: Push bump commit and release tag
       shell: bash
-      run: |
-        git pull --rebase
-        git push --follow-tags
+      run: git push --follow-tags

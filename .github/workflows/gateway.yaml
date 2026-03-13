@@ -27,5 +27,3 @@ jobs:
         uses: ./.github/actions/release-chart
         with:
           chart: gateway
-          token: ${{ github.token }}
-          actor: ${{ github.actor }}

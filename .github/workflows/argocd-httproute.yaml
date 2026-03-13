@@ -27,5 +27,3 @@ jobs:
         uses: ./.github/actions/release-chart
         with:
           chart: argocd-httproute
-          token: ${{ github.token }}
-          actor: ${{ github.actor }}
