@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.0.1 - 2026-03-13
+#### Continuous Integration
+- implement initial helm chart releases - (2294f05) - Nathan Blair
+#### Miscellaneous Chores
+- (**version**) argocd-httproute-0.0.1 - (6ed7914) - nathanblair
+
+- - -
+
 ## argocd-httproute-0.0.1 - 2026-03-12
 #### Continuous Integration
 - implement initial helm chart releases - (2294f05) - Nathan Blair
