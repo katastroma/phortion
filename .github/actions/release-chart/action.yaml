@@ -14,15 +14,15 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Pull any changes
-      shell: bash
-      run: git pull --rebase
-
     - name: Configure git
       shell: bash
       run: |
         git config user.name '${{ github.actor }}'
         git config user.email '${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com'
+
+    - name: Pull any changes
+      shell: bash
+      run: git pull --rebase
 
     - name: Setup mise
       shell: bash
@@ -57,6 +57,10 @@ runs:
           ${{ inputs.chart }}-${{ steps.version.outputs.version }}.tgz \
           oci://ghcr.io/katastroma-platform/phortion
 
-    - name: Push bump commit and release tag
+    - name: Push bump commit
       shell: bash
-      run: git push --follow-tags
+      run: git push
+
+    - name: Push release tag
+      shell: bash
+      run: git push origin ${{ inputs.chart }}-${{ steps.version.outputs.version }}

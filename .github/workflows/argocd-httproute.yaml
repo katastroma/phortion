@@ -5,6 +5,7 @@ on:
   push:
     branches: [default]
     paths:
+      - .github/actions/release-chart/*
       - .github/workflows/argocd-httproute.yaml
       - argocd-httproute/**
 
