@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## gateway-0.0.3 - 2026-03-13
+#### Bug Fixes
+- trying to fix a perpetual diff - (fbd3e4b) - Nathan Blair
+
+- - -
+
 ## gateway-0.0.2 - 2026-03-13
 #### Miscellaneous Chores
 - regenerate correct CHANGELOGs now that pushes are fixed - (0604fcd) - Nathan Blair
