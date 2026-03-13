@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.0.5 - 2026-03-13
+#### Refactoring
+- domain values should come from global - (0b24825) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.0.4 - 2026-03-13
 #### Bug Fixes
 - handle external binding of argocd-httproute - (c2d1a13) - Nathan Blair
