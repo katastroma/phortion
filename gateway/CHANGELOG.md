@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## gateway-0.0.4 - 2026-03-13
+#### Refactoring
+- domain values should come from global - (0b24825) - Nathan Blair
+
+- - -
+
 ## gateway-0.0.3 - 2026-03-13
 #### Bug Fixes
 - trying to fix a perpetual diff - (fbd3e4b) - Nathan Blair
