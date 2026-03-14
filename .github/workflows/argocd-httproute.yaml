@@ -5,6 +5,7 @@ on:
   push:
     branches: [default]
     paths:
+      - cog.toml
       - .github/workflows/argocd-httproute.yaml
       - argocd-httproute/**
 
