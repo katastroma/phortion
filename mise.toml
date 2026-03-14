@@ -1,5 +1,5 @@
 [tools]
 "cargo:cocogitto" = "latest"
 kubectl = "latest"
-"github:helm/helm" = "latest"
+helm = "latest"
 "github:mrjosh/helm-ls" = { version = "latest", bin = "helm-ls" }
