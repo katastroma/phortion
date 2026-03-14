@@ -5,26 +5,17 @@ on:
   push:
     branches: [default]
     paths:
-      - .github/actions/release-chart/*
       - .github/workflows/argocd-httproute.yaml
       - argocd-httproute/**
 
 jobs:
   release:
-    runs-on: ubuntu-latest
-    concurrency:
-      cancel-in-progress: false
-      group: release-charts
+    uses: katastroma-platform/skeuotheke/.github/workflows/release-chart.yaml@v0
     permissions:
-      packages: write
       contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Release Chart
-        uses: ./.github/actions/release-chart
-        with:
-          chart: argocd-httproute
+      packages: write
+    with:
+      chart_name: argocd-httproute
+      chart_path: argocd-httproute
+      package_name: argocd-httproute
+      registry: oci://ghcr.io/katastroma-platform/phortion
