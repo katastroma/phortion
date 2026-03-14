@@ -20,6 +20,14 @@ set -e
 cog verify --file $1
 """
 
-[monorepo.packages]
-gateway = { path = "gateway" }
-argocd-httproute = { path = "argocd-httproute" }
+[monorepo.packages.gateway]
+path = "gateway"
+include = [
+    ".github/workflows/gateway.yaml",
+]
+
+[monorepo.packages.argocd-httproute]
+path = "argocd-httproute"
+include = [
+    ".github/workflows/argocd-httproute.yaml",
+]
