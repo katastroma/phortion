@@ -5,9 +5,9 @@ global:
     internal: localhost
     external: ''
 
-gateway_system:
-  name: default
-  namespace: gateway-system
+  gateway:
+    namespace: gateway-system
+    name: default
 
 ingress:
   subdomain: argocd

@@ -1,11 +1,13 @@
 global:
   domain:
-    external: ''
     internal: localhost
+    external: ''
+
+  gateway:
+    namespace: gateway-system
+    name: default
 
 gateway:
-  name: default
-  namespace: gateway-system
   className: traefik
 
 ports:

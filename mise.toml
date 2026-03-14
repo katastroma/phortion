@@ -1,3 +1,5 @@
 [tools]
-helm-ls = "latest"
-cocogitto = "latest"
+"cargo:cocogitto" = "latest"
+kubectl = "latest"
+"github:helm/helm" = "latest"
+"github:mrjosh/helm-ls" = { version = "latest", bin = "helm-ls" }

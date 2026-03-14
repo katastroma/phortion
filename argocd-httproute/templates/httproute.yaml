@@ -8,15 +8,15 @@ spec:
     {{- if .Values.global.domain.internal }}
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: {{ .Values.gateway_system.name }}
-      namespace: {{ .Values.gateway_system.namespace }}
+      name: {{ .Values.global.gateway.name }}
+      namespace: {{ .Values.global.gateway.namespace }}
       sectionName: internal
     {{- end }}
     {{- if .Values.global.domain.external }}
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: {{ .Values.gateway_system.name }}
-      namespace: {{ .Values.gateway_system.namespace }}
+      name: {{ .Values.global.gateway.name }}
+      namespace: {{ .Values.global.gateway.namespace }}
       sectionName: external
     {{- end }}
   hostnames:

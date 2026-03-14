@@ -23,11 +23,13 @@ cog verify --file $1
 [monorepo.packages.gateway]
 path = "gateway"
 include = [
+    "cog.toml",
     ".github/workflows/gateway.yaml",
 ]
 
 [monorepo.packages.argocd-httproute]
 path = "argocd-httproute"
 include = [
+    "cog.toml",
     ".github/workflows/argocd-httproute.yaml",
 ]
