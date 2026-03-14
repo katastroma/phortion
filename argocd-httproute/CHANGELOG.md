@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.0.6 - 2026-03-14
+#### Continuous Integration
+- trigger on changes to cog config - (0afaa0e) - Nathan Blair
+- adopt skeuotheke workflow for chart releases - (f774bb5) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.0.5 - 2026-03-13
 #### Refactoring
 - domain values should come from global - (0b24825) - Nathan Blair
