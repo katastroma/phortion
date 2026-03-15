@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.0.7 - 2026-03-15
+#### Refactoring
+- no defaults - (3476475) - Nathan Blair
+- use global gateway information as well - (6fa0deb) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.0.6 - 2026-03-14
 #### Continuous Integration
 - trigger on changes to cog config - (0afaa0e) - Nathan Blair
