@@ -2,12 +2,11 @@ name: argocd-httproute
 
 global:
   domain:
-    internal: localhost
+    internal: ''
     external: ''
-
   gateway:
-    namespace: gateway-system
-    name: default
+    namespace: ''
+    name: ''
 
 ingress:
   subdomain: argocd

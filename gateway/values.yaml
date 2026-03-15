@@ -1,15 +1,14 @@
 global:
   domain:
-    internal: localhost
+    internal: ''
     external: ''
-
   gateway:
-    namespace: gateway-system
-    name: default
+    namespace: ''
+    name: ''
 
 gateway:
-  className: traefik
+  className: ''
 
 ports:
-  web: 8000
-  websecure: 8443
+  web: ''
+  websecure: ''
