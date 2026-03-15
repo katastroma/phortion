@@ -1,4 +1,5 @@
 [tools]
+"cargo-binstall" = "latest"
 "cargo:cocogitto" = "latest"
 kubectl = "latest"
 helm = "latest"
