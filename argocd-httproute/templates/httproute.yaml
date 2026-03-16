@@ -13,6 +13,7 @@ spec:
       namespace: {{ .Values.global.gateway.namespace }}
       sectionName: internal
     {{- end }}
+
     {{- if .Values.global.domain.external }}
     - group: gateway.networking.k8s.io
       kind: Gateway
@@ -20,13 +21,16 @@ spec:
       namespace: {{ .Values.global.gateway.namespace }}
       sectionName: external
     {{- end }}
+
   hostnames:
     {{- if .Values.global.domain.internal }}
     - {{ .Values.ingress.subdomain }}.{{ .Values.global.domain.internal }}
     {{- end }}
+
     {{- if .Values.global.domain.external }}
     - {{ .Values.ingress.subdomain }}.{{ .Values.global.domain.external }}
     {{- end }}
+
   rules:
     - backendRefs:
       - group: ''
