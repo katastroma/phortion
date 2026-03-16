@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## gateway-0.1.0 - 2026-03-16
+#### Features
+- (**gateway**) now owns its own TLS - (804ebd7) - Nathan Blair
+
+- - -
+
 ## gateway-0.0.6 - 2026-03-15
 #### Refactoring
 - no defaults - (3476475) - Nathan Blair
