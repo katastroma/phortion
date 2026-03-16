@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.0.8 - 2026-03-16
+#### Refactoring
+- make argocd-httproute template more readable - (1cf380c) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.0.7 - 2026-03-15
 #### Refactoring
 - no defaults - (3476475) - Nathan Blair
