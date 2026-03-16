@@ -1,0 +1,25 @@
+{{- if .Values.global.domain.internal }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.global.domain.internal }}-tls
+  namespace: {{ .Values.global.gateway.namespace }}
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ .Values.tls.internal.cert }}
+  tls.key: {{ .Values.tls.internal.key }}
+{{- end }}
+
+{{- if .Values.global.domain.external }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.global.domain.external }}-tls
+  namespace: {{ .Values.global.gateway.namespace }}
+type: kubernetes.io/tls
+data:
+  tls.crt: {{ .Values.tls.external.cert }}
+  tls.key: {{ .Values.tls.external.key }}
+{{- end }}

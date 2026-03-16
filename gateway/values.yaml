@@ -12,3 +12,11 @@ gateway:
 ports:
   web: ''
   websecure: ''
+
+tls:
+  internal:
+    key: '' # base64-encoded PEM
+    cert: '' # base64-encoded PEM
+  external:
+    key: '' # base64-encoded PEM
+    cert: '' # base64-encoded PEM
