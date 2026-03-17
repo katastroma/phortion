@@ -1,0 +1,22 @@
+name: Release Gateway Chart
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [default]
+    paths:
+      - cog.toml
+      - .github/workflows/gateway.yaml
+      - gateway/**
+
+jobs:
+  release:
+    uses: katastroma-platform/skeuotheke/.github/workflows/release-chart.yaml@v0
+    permissions:
+      contents: write
+      packages: write
+    with:
+      chart_name: pedalion
+      chart_path: pedalion
+      package_name: pedalion
+      registry: oci://ghcr.io/katastroma-platform/phortion

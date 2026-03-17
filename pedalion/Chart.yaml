@@ -1,0 +1,4 @@
+apiVersion: v2
+name: pedalion
+description: Platform rudder - steer and drive the platform resources
+version: 0.0.0
