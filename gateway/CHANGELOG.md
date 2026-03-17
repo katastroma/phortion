@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## gateway-0.1.1 - 2026-03-17
+#### Refactoring
+- use CRD infra - (6d1a73f) - Nathan Blair
+
+- - -
+
 ## gateway-0.1.0 - 2026-03-16
 #### Features
 - (**gateway**) now owns its own TLS - (804ebd7) - Nathan Blair
