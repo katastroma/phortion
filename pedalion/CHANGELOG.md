@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## pedalion-0.1.0 - 2026-03-18
+#### Features
+- <span style="background-color: #d73a49; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85em;">BREAKING</span>update org URL - (987727c) - Nathan Blair
+#### Miscellaneous Chores
+- don't bump on as many commits - (a73efb3) - Nathan Blair
+
+- - -
+
 ## pedalion-0.0.1 - 2026-03-17
 #### Bug Fixes
 - phortion packages need to track their workflows, too - (d8bf811) - Nathan Blair
