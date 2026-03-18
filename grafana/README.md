@@ -1,0 +1,3 @@
+# Grafana
+
+Grafana observability stack.

@@ -1,0 +1,3 @@
+# ESO
+
+External Secrets Operator.
