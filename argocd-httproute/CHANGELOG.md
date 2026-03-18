@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.1.0 - 2026-03-18
+#### Features
+- <span style="background-color: #d73a49; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85em;">BREAKING</span>update org URL - (987727c) - Nathan Blair
+#### Refactoring
+- use CRD infra - (6d1a73f) - Nathan Blair
+#### Miscellaneous Chores
+- don't bump on as many commits - (a73efb3) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.0.8 - 2026-03-16
 #### Refactoring
 - make argocd-httproute template more readable - (1cf380c) - Nathan Blair
