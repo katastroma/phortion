@@ -4,5 +4,5 @@ global:
     namespace: ''
 
 image:
-  repository: ghcr.io/katastroma-platform/pedalion
+  repository: ghcr.io/katastroma/pedalion
   tag: latest

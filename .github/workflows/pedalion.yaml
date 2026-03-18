@@ -11,7 +11,7 @@ on:
 
 jobs:
   release:
-    uses: katastroma-platform/skeuotheke/.github/workflows/release-chart.yaml@v0
+    uses: katastroma/skeuotheke/.github/workflows/release-chart.yaml@v0
     permissions:
       contents: write
       packages: write
@@ -19,4 +19,4 @@ jobs:
       chart_name: pedalion
       chart_path: pedalion
       package_name: pedalion
-      registry: oci://ghcr.io/katastroma-platform/phortion
+      registry: oci://ghcr.io/katastroma/phortion
