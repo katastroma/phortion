@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## pedalion-0.1.2 - 2026-03-19
+#### Bug Fixes
+- (**pedalion**) pedalion is its own workflow - (3ab21d4) - Nathan Blair
+
+- - -
+
 ## pedalion-0.1.1 - 2026-03-19
 #### Bug Fixes
 - (**pedalion**) update cluster resources needed to deploy pedalion - (1333fb4) - Nathan Blair
