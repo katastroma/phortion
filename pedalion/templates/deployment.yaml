@@ -2,8 +2,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
   namespace: {{ .Values.global.pedalion.namespace }}
+  name: {{ .Chart.Name }}
   labels:
     app.kubernetes.io/name: {{ .Chart.Name }}
     app.kubernetes.io/managed-by: katastroma
@@ -21,18 +21,23 @@ spec:
       serviceAccountName: {{ .Chart.Name }}
       initContainers:
         - name: crd-install
-          image: {{ .Values.image.repository }}/init:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}/init:{{ .Values.image.init.tag }}
         - name: adopt
-          image: {{ .Values.image.repository }}/adopt:{{ .Values.image.tag }}
-      containers:
-        - name: controller
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}/adopt:{{ .Values.image.adopt.tag }}
           env:
+            - name: ROOT_NAME
+              value: {{ .Values.global.root.app.name }}
             - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: DEPLOYMENT_NAME
+      containers:
+        - name: controller
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          env:
+            - name: ROOT_NAME
+              value: {{ .Values.global.root.app.name }}
+            - name: POD_NAMESPACE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.name
+                  fieldPath: metadata.namespace
