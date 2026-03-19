@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## argocd-httproute-0.1.1 - 2026-03-19
+#### Bug Fixes
+- (**pedalion**) update cluster resources needed to deploy pedalion - (1333fb4) - Nathan Blair
+#### Documentation
+- add docs for Charts - (78abd87) - Nathan Blair
+
+- - -
+
 ## argocd-httproute-0.1.0 - 2026-03-18
 #### Features
 - <span style="background-color: #d73a49; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85em;">BREAKING</span>update org URL - (987727c) - Nathan Blair
