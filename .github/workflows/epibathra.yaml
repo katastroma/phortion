@@ -18,5 +18,5 @@ jobs:
     with:
       chart_name: epibathra
       chart_path: epibathra
-      package_name: gateway
+      package_name: epibathra
       registry: oci://ghcr.io/katastroma/phortion
