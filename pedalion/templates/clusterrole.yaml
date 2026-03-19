@@ -1,4 +1,6 @@
 ---
+# ClusterRole (not a namespaced Role) because Applications live in tenant
+# namespaces. Pedalion must watch across all namespaces.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
