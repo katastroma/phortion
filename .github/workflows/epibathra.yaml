@@ -1,0 +1,22 @@
+name: Release Epibathra Chart
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [default]
+    paths:
+      - cog.toml
+      - .github/workflows/epibathra.yaml
+      - epibathra/**
+
+jobs:
+  release:
+    uses: katastroma/skeuotheke/.github/workflows/release-chart.yaml@v0
+    permissions:
+      contents: write
+      packages: write
+    with:
+      chart_name: epibathra
+      chart_path: epibathra
+      package_name: gateway
+      registry: oci://ghcr.io/katastroma/phortion

@@ -1,0 +1,7 @@
+global:
+  domain:
+    internal: ''
+    external: ''
+  gateway:
+    name: ''
+    namespace: ''

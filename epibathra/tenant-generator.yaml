@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tenant-apps
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '1'
+
+spec:
+  goTemplate: true
+  goTemplateOptions: ['missingkey=error']
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: {{ .Values.manifest.repoURL }}
+              revision: {{ .Values.manifest.revision }}
+              files:
+                - path: 'stacks/*.yaml'
+
+          - git:
+              repoURL: '{{ `{{ .stackRepo }}` }}'
+              revision: '{{ `{{ .stackRevision }}` }}'
+              files:
+                - path: apps/*.yaml
+
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/source
+
+  template:
+    metadata:
+      name: '{{ `{{ .name }}` }}'
+      namespace: argocd
+      annotations:
+        argocd.argoproj.io/sync-wave: '{{ `{{ .wave }}` }}'
+
+    spec:
+      project: default
+      source:
+        repoURL: '{{ `{{ .repoURL }}` }}'
+        targetRevision: '{{ `{{ .targetRevision }}` }}'
+        path: '{{ `{{ .path }}` }}'
+      destination:
+        server: '{{ `{{ default "https://kubernetes.default.svc" .cluster }}` }}'
+        namespace: '{{ `{{ .namespace }}` }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+
+  templatePatch: |
+    {{ `{{- if ne .cascade "false" }}` }}
+    metadata:
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    {{ `{{- end }}` }}

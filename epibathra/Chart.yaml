@@ -1,0 +1,4 @@
+apiVersion: v2
+name: epibathra
+description: Platform API — tenant management and frontend
+version: 0.0.0
