@@ -1,17 +1,8 @@
 ---
 global:
-  root:
-    app:
-      name: ''
   pedalion:
     namespace: ''
 
 image:
   repository: ghcr.io/katastroma/pedalion
   tag: latest
-
-  init:
-    tag: latest
-
-  adopt:
-    tag: latest
