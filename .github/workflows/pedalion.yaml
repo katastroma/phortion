@@ -1,4 +1,4 @@
-name: Release Gateway Chart
+name: Release Pedalion Chart
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
     branches: [default]
     paths:
       - cog.toml
-      - .github/workflows/gateway.yaml
-      - gateway/**
+      - .github/workflows/pedalion.yaml
+      - pedalion/**
 
 jobs:
   release:
