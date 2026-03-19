@@ -1,28 +1,10 @@
 # Epibathra
 
-Platform control plane for [katastroma](https://github.com/katastroma).
-Provisions and manages tenants, their namespaces, and the Applications and
-RepoCredentials within them. Provides tenant isolation, self-service onboarding,
-and managed deployments.
-
-Packaged as a Helm chart. Phortion charts are consumed as Helm dependencies.
-
-## What It Does
-
-Epibathra is responsible for:
-
-- **Tenant lifecycle** — provisioning tenants and their namespaces, creating
-  Application and RepoCredential resources on their behalf. CRD types are
-  defined in [tropis](https://github.com/katastroma/tropis).
-  [Pedalion](https://github.com/katastroma/pedalion) reconciles them.
-- **Namespace hierarchy** — managing parent-child relationships between tenant
-  namespaces. Kubernetes namespaces are flat; epibathra enforces the hierarchy.
-- **Tenant isolation** — enforcing that tenants can only operate within their
-  boundaries at the cluster level.
-- **Tenant self-service** — API and UI for tenants to manage their own
-  registrations.
-- **Platform identity** — authenticating tenant accounts and providing the
-  identity backbone for policy enforcement.
+Helm chart that composes the tenant management stack for
+[katastroma](https://github.com/katastroma). Deploys
+[grammateus](https://github.com/katastroma/grammateus),
+[prora](https://github.com/katastroma/prora), and off-the-shelf components as
+dependencies.
 
 ## Components
 
@@ -36,7 +18,7 @@ These use existing solutions — no custom development required.
   for tenant boundary decisions. OOB solution (e.g. OPA/Gatekeeper, Kyverno).
   Specific solution TBD. Should integrate well with whichever IdP is chosen.
 
-### Custom (requires development)
+### Custom
 
 - **[Grammateus](https://github.com/katastroma/grammateus)** — API server.
   Manages tenant namespaces and attaches Applications and RepoCredentials to
@@ -51,9 +33,9 @@ install it on their repos and provide the installation ID at registration.
 
 ## Rollout Order
 
-OOB components first, then custom:
+Off-the-shelf components first, then custom:
 
 1. Auth/IdP
 2. Gatekeeper
-3. API Server
-4. Frontend
+3. Grammateus
+4. Prora
