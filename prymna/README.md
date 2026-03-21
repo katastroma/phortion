@@ -1,9 +1,16 @@
 # Prymna
 
-Helm chart that deploys the platform runtime for
-[katastroma](https://github.com/katastroma). Provisions
-[pedalion](https://github.com/katastroma/pedalion) (the Application operator)
-and the [zeugma](https://github.com/katastroma/zeugma) service (adapter service
-for resolution and provisioning backend), along with their RBAC.
+Helm chart that deploys the GitOps engine for
+[katastroma](https://github.com/katastroma).
 
-The adapter image is configurable — swap the image to swap the backend.
+## Components
+
+- **[Pharos](https://github.com/katastroma/pharos)** — webhook server. Receives
+  git push events and orchestrates the pipeline.
+- **[Phortizo](https://github.com/katastroma/phortizo)** — retriever. Fetches
+  source from repositories.
+- **[Orpheus](https://github.com/katastroma/orpheus)** — renderer. Renders
+  manifests from source content.
+- **[Histia](https://github.com/katastroma/histia)** — provisioner. Applies
+  manifests to the cluster via impersonation. Only component requiring cluster
+  RBAC (`impersonate` verb).
