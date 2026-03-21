@@ -1,0 +1,67 @@
+---
+global:
+  domain:
+    internal: ''
+    external: ''
+  gateway:
+    name: ''
+    namespace: ''
+  controller:
+    namespace: argocd
+
+repo:
+  git:
+    url: https://github.com/katastroma
+    githubAppID: '2935385'
+    githubAppInstallationID: '112062846'
+    githubAppPrivateKey: ''
+
+# Traefik — disabled by default, enable via ArgoCD UI for dev clusters
+traefik:
+  enabled: false
+  namespaceOverride: traefik-system
+  gateway:
+    enabled: false
+  providers:
+    kubernetesGateway:
+      enabled: true
+
+# DNS — configures CoreDNS to resolve a wildcard domain to the cluster's
+# ingress IP. When enabled, provisions a CoreDNS custom zone, a forward
+# override, and a NodePort service so hosts outside the cluster can query it.
+# When zone and address are both empty (default), no DNS resources are created.
+#   zone: the domain to resolve (e.g., 'testbed', 'idealab')
+#   address: the IP returned for all queries under the zone (e.g., node/LB IP)
+#   upstream: DNS servers CoreDNS forwards non-zone queries to — overrides the
+#     default forward to /etc/resolv.conf to prevent DNS loops when an external
+#     resolver (e.g., Firewalla) also points at CoreDNS
+dns:
+  zone: ''
+  address: ''
+  upstream:
+    - '1.1.1.1' # Cloudflare
+    - '208.67.222.222' # OpenDNS
+
+# Gateway sub-chart — values provided by operator (holkos)
+#   parent: the ConfigMap this gateway depends on in the teardown DAG.
+#     Set to 'system' when using an external Gateway API implementation
+#     not managed by katastroma (e.g., Cilium).
+gateway:
+  parent: ''
+  gateway:
+    className: ''
+  ports:
+    web: ''
+    websecure: ''
+  tls:
+    internal:
+      key: '' # base64-encoded PEM
+      cert: '' # base64-encoded PEM
+    external:
+      key: '' # base64-encoded PEM
+      cert: '' # base64-encoded PEM
+
+# ArgoCD HTTPRoute sub-chart
+argocd-httproute:
+  ingress:
+    subdomain: ''

@@ -1,0 +1,33 @@
+{{- if and .Values.dns.zone .Values.dns.address }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  forward.override: |
+    forward . {{ range .Values.dns.upstream }}{{ . }} {{ end }}
+  {{ .Values.dns.zone }}.server: |
+    {{ .Values.dns.zone }} {
+      template IN A {
+        answer "{{`{{ .Name }}`}} 60 IN A {{ .Values.dns.address }}"
+      }
+    }
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coredns-external
+  namespace: kube-system
+spec:
+  type: NodePort
+  selector:
+    k8s-app: kube-dns
+  ports:
+    - name: dns-udp
+      port: 53
+      targetPort: 53
+      protocol: UDP
+{{- end }}

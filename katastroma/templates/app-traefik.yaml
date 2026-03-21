@@ -1,0 +1,34 @@
+{{- if .Values.traefik.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: traefik
+  annotations:
+    argocd.argoproj.io/sync-wave: '-3'
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/traefik/helm
+    chart: traefik
+    targetRevision: 39.*
+    helm:
+      parameters:
+        - name: namespaceOverride
+          value: {{ .Values.traefik.namespaceOverride | default "traefik-system" }}
+        - name: gateway.enabled
+          value: {{ .Values.traefik.gateway.enabled | quote }}
+        - name: providers.kubernetesGateway.enabled
+          value: {{ .Values.traefik.providers.kubernetesGateway.enabled | quote }}
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+{{- end }}

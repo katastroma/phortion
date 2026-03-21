@@ -1,0 +1,95 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: system
+  labels:
+    app.kubernetes.io/managed-by: pedalion
+    app.kubernetes.io/part-of: system
+  annotations:
+    argocd.argoproj.io/sync-wave: '-5'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/katastroma/katastroma
+    targetRevision: HEAD
+    path: .
+    helm:
+      parameters:
+        - name: global.domain.internal
+          value: {{ .Values.global.domain.internal }}
+        - name: global.domain.external
+          value: {{ .Values.global.domain.external | default "" | quote }}
+        - name: global.gateway.name
+          value: {{ .Values.global.gateway.name }}
+        - name: global.gateway.namespace
+          value: {{ .Values.global.gateway.namespace }}
+        - name: repo.git.url
+          value: {{ .Values.repo.git.url }}
+        - name: repo.git.githubAppID
+          value: {{ .Values.repo.git.githubAppID | quote }}
+        - name: repo.git.githubAppInstallationID
+          value: {{ .Values.repo.git.githubAppInstallationID | quote }}
+        - name: repo.git.githubAppPrivateKey
+          value: {{ .Values.repo.git.githubAppPrivateKey }}
+        - name: tls.internal.key
+          value: {{ .Values.tls.internal.key }}
+        - name: tls.internal.cert
+          value: {{ .Values.tls.internal.cert }}
+        - name: tls.external.key
+          value: {{ .Values.tls.external.key }}
+        - name: tls.external.cert
+          value: {{ .Values.tls.external.cert }}
+        - name: dns.zone
+          value: {{ .Values.dns.zone | default "" | quote }}
+        - name: dns.address
+          value: {{ .Values.dns.address | default "" | quote }}
+        - name: traefik.enabled
+          value: {{ .Values.traefik.enabled | quote }}
+        - name: traefik.namespaceOverride
+          value: {{ .Values.traefik.namespaceOverride | default "traefik-system" }}
+        - name: gateway.parent
+          value: {{ .Values.gateway.parent | default "" | quote }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Values.controller.namespace }}
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      name: system
+      jsonPointers:
+        - /spec/source
+    - group: argoproj.io
+      kind: Application
+      name: epibathra
+      jsonPointers:
+        - /spec/source
+    - group: argoproj.io
+      kind: Application
+      name: traefik
+      jsonPointers:
+        - /spec/source
+    - group: argoproj.io
+      kind: Application
+      name: gateway
+      jsonPointers:
+        - /spec/source
+    - group: argoproj.io
+      kind: Application
+      name: argocd-httproute
+      jsonPointers:
+        - /spec/source
+    - group: ''
+      kind: Secret
+      jsonPointers:
+        - /data
+        - /stringData
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true

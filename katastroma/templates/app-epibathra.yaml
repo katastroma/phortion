@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: epibathra
+  annotations:
+    argocd.argoproj.io/sync-wave: '0'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/katastroma/epibathra
+    targetRevision: HEAD
+    path: .
+    helm:
+      parameters:
+        - name: global.domain.internal
+          value: {{ .Values.global.domain.internal }}
+        - name: global.domain.external
+          value: {{ .Values.global.domain.external | default "" | quote }}
+        - name: global.gateway.name
+          value: {{ .Values.global.gateway.name }}
+        - name: global.gateway.namespace
+          value: {{ .Values.global.gateway.namespace }}
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true

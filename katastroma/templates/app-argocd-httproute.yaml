@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: argocd-httproute
+  annotations:
+    argocd.argoproj.io/sync-wave: '-1'
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/katastroma/phortion
+    chart: argocd-httproute
+    targetRevision: '>=0.0.0'
+    helm:
+      parameters:
+        - name: global.domain.internal
+          value: {{ .Values.global.domain.internal }}
+        - name: global.domain.external
+          value: {{ .Values.global.domain.external | default "" | quote }}
+        - name: global.gateway.name
+          value: {{ .Values.global.gateway.name }}
+        - name: global.gateway.namespace
+          value: {{ .Values.global.gateway.namespace }}
+        - name: ingress.subdomain
+          value: {{ index .Values "argocd-httproute" "ingress" "subdomain" }}
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true

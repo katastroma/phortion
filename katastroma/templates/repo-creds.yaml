@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: katastroma-repo
+  namespace: {{ .Values.controller.namespace }}
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  type: git
+  url: {{ .Values.repo.git.url }}
+  githubAppID: {{ .Values.repo.git.githubAppID | quote }}
+  githubAppInstallationID: {{ .Values.repo.git.githubAppInstallationID | quote }}
+data:
+  githubAppPrivateKey: {{ .Values.repo.git.githubAppPrivateKey }}

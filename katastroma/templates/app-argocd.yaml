@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '-4'
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/katastroma/katastroma
+    targetRevision: HEAD
+    path: argo-cd
+  destination:
+    server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      name: argocd
+      jsonPointers:
+        - /spec/source
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true

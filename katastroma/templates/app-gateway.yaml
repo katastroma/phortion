@@ -1,0 +1,48 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: {{ .Values.controller.namespace }}
+  name: gateway
+  annotations:
+    argocd.argoproj.io/sync-wave: '-2'
+spec:
+  project: default
+  source:
+    repoURL: ghcr.io/katastroma/phortion
+    chart: gateway
+    targetRevision: '>=0.0.0'
+    helm:
+      parameters:
+        - name: global.domain.internal
+          value: {{ .Values.global.domain.internal }}
+        - name: global.domain.external
+          value: {{ .Values.global.domain.external | default "" | quote }}
+        - name: global.gateway.name
+          value: {{ .Values.global.gateway.name }}
+        - name: global.gateway.namespace
+          value: {{ .Values.global.gateway.namespace }}
+        - name: gateway.className
+          value: {{ .Values.gateway.gateway.className }}
+        - name: ports.web
+          value: {{ .Values.gateway.ports.web | quote }}
+        - name: ports.websecure
+          value: {{ .Values.gateway.ports.websecure | quote }}
+        - name: tls.internal.key
+          value: {{ .Values.tls.internal.key }}
+        - name: tls.internal.cert
+          value: {{ .Values.tls.internal.cert }}
+        - name: tls.external.key
+          value: {{ .Values.tls.external.key }}
+        - name: tls.external.cert
+          value: {{ .Values.tls.external.cert }}
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
