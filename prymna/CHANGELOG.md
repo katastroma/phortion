@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## prymna-0.0.1 - 2026-03-21
+#### Bug Fixes
+- (**pedalion**) update cluster resources needed to deploy pedalion - (1333fb4) - Nathan Blair
+- phortion packages need to track their workflows, too - (d8bf811) - Nathan Blair
+- still more release workflow fixes - (29ee1db) - Nathan Blair
+- still fixing release cycles - (8abf5ab) - Nathan Blair
+#### Documentation
+- update docs for new architecture - (e06905f) - Nathan Blair
+#### Refactoring
+- rename pedalion chart - (de6f5c7) - Nathan Blair
+- use CRD infra - (6d1a73f) - Nathan Blair
+- use global gateway information as well - (6fa0deb) - Nathan Blair
+#### Miscellaneous Chores
+- don't bump on as many commits - (a73efb3) - Nathan Blair
+- set appropriate cog config - (8a41b67) - Nathan Blair
+- initial commit - (59e3df3) - Nathan Blair
+
+- - -
+
 ## pedalion-0.1.2 - 2026-03-19
 #### Bug Fixes
 - (**pedalion**) pedalion is its own workflow - (3ab21d4) - Nathan Blair
