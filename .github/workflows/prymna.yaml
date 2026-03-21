@@ -1,4 +1,4 @@
-name: Release Pedalion Chart
+name: Release Prymna Chart
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
     branches: [default]
     paths:
       - cog.toml
-      - .github/workflows/pedalion.yaml
-      - pedalion/**
+      - .github/workflows/prymna.yaml
+      - prymna/**
 
 jobs:
   release:
@@ -16,7 +16,7 @@ jobs:
       contents: write
       packages: write
     with:
-      chart_name: pedalion
-      chart_path: pedalion
-      package_name: pedalion
+      chart_name: prymna
+      chart_path: prymna
+      package_name: prymna
       registry: oci://ghcr.io/katastroma/phortion

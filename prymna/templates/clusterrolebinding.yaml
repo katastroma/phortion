@@ -1,0 +1,32 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.pedalion.name }}
+  labels:
+    app.kubernetes.io/managed-by: katastroma
+    app.kubernetes.io/part-of: katastroma
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.pedalion.name }}
+subjects:
+  - kind: ServiceAccount
+    namespace: {{ .Values.global.namespace }}
+    name: {{ .Values.pedalion.name }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Values.ergata.name }}
+  labels:
+    app.kubernetes.io/managed-by: katastroma
+    app.kubernetes.io/part-of: katastroma
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.ergata.name }}
+subjects:
+  - kind: ServiceAccount
+    namespace: {{ .Values.global.namespace }}
+    name: {{ .Values.ergata.name }}

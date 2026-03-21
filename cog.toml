@@ -20,11 +20,11 @@ include = [
     ".github/workflows/gateway.yaml",
 ]
 
-[monorepo.packages.pedalion]
-path = "pedalion"
+[monorepo.packages.prymna]
+path = "prymna"
 include = [
     "cog.toml",
-    ".github/workflows/pedalion.yaml",
+    ".github/workflows/prymna.yaml",
 ]
 
 [monorepo.packages.epibathra]

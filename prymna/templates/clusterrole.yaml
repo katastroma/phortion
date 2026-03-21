@@ -4,7 +4,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ .Values.pedalion.name }}
   labels:
     app.kubernetes.io/managed-by: katastroma
     app.kubernetes.io/part-of: katastroma
@@ -16,3 +16,19 @@ rules:
       - get # main: controller-runtime informer fetches individual Applications on change events
       - list # main: controller-runtime informer lists all Applications on initial cache sync at mgr.Start
       - watch # main: controller-runtime informer receives Application change events
+---
+# The adapter reads katastroma Applications to translate them for the
+# configured backend. ClusterRole because Applications live in tenant namespaces.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.ergata.name }}
+  labels:
+    app.kubernetes.io/managed-by: katastroma
+    app.kubernetes.io/part-of: katastroma
+rules:
+  - apiGroups: [katastroma.org]
+    resources:
+      - applications # Adapter reads the Application to translate for the backend
+    verbs:
+      - get # adapter: Gets the Application by namespaced name from the Sync request

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: prymna
+description: Platform runtime — deploys pedalion and ergata
+version: 0.0.0

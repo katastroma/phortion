@@ -1,4 +1,0 @@
-apiVersion: v2
-name: pedalion
-description: Application operator — watches Applications and delegates resolution and provisioning
-version: 0.0.0

@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: {{ .Values.pedalion.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.pedalion.name }}
+    app.kubernetes.io/managed-by: katastroma
+    app.kubernetes.io/part-of: katastroma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.pedalion.name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.pedalion.name }}
+    spec:
+      serviceAccountName: {{ .Values.pedalion.name }}
+      containers:
+        - name: controller
+          image: {{ .Values.pedalion.image.repository }}:{{ .Values.pedalion.image.tag }}
+          env:
+            - name: ADAPTER_ADDR
+              value: {{ .Values.ergata.name }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.global.namespace }}
+  name: {{ .Values.ergata.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.ergata.name }}
+    app.kubernetes.io/managed-by: katastroma
+    app.kubernetes.io/part-of: katastroma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.ergata.name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.ergata.name }}
+    spec:
+      serviceAccountName: {{ .Values.ergata.name }}
+      containers:
+        - name: adapter
+          image: {{ .Values.ergata.image.repository }}/{{ .Values.ergata.adapter.name }}:{{ .Values.ergata.image.tag }}

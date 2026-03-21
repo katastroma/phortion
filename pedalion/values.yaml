@@ -1,8 +1,0 @@
----
-global:
-  pedalion:
-    namespace: ''
-
-image:
-  repository: ghcr.io/katastroma/pedalion
-  tag: latest

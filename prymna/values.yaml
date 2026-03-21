@@ -1,0 +1,17 @@
+---
+global:
+  namespace: ''
+
+pedalion:
+  name: pedalion
+  image:
+    repository: ghcr.io/katastroma/pedalion
+    tag: ''
+
+ergata:
+  name: ergata
+  adapter:
+    name: ''
+  image:
+    repository: ghcr.io/katastroma/ergata
+    tag: ''
