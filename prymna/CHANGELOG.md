@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## prymna-0.1.0 - 2026-03-24
+#### Features
+- (**prymna**) update with new dependencies - (569024f) - Nathan Blair
+#### Documentation
+- update for naukleros change - (cefe30a) - Nathan Blair
+- clean up docs - (51cb350) - Nathan Blair
+
+- - -
+
 ## prymna-0.0.1 - 2026-03-21
 #### Bug Fixes
 - (**pedalion**) update cluster resources needed to deploy pedalion - (1333fb4) - Nathan Blair
