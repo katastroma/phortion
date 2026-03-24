@@ -1,4 +1,4 @@
 apiVersion: v2
 name: prymna
-description: Platform runtime — deploys pedalion and ergata
+description: Pipeline stack — pipeline coordinator, OTel collector, source handlers, renderers, orderers, and provisioners
 version: 0.0.0

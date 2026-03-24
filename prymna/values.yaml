@@ -2,16 +2,32 @@
 global:
   namespace: ''
 
-pedalion:
-  name: pedalion
+pharos:
+  name: pharos
   image:
-    repository: ghcr.io/katastroma/pedalion
+    repository: ghcr.io/katastroma/pharos
     tag: ''
 
-ergata:
-  name: ergata
-  adapter:
-    name: ''
+phortizo:
+  name: phortizo
   image:
-    repository: ghcr.io/katastroma/ergata
+    repository: ghcr.io/katastroma/phortizo
+    tag: ''
+
+orpheus:
+  name: orpheus
+  image:
+    repository: ghcr.io/katastroma/orpheus
+    tag: ''
+
+stolarches:
+  name: stolarches
+  image:
+    repository: ghcr.io/katastroma/stolarches
+    tag: ''
+
+histia:
+  name: histia
+  image:
+    repository: ghcr.io/katastroma/histia
     tag: ''
