@@ -1,4 +1,4 @@
 apiVersion: v2
 name: epibathra
-description: Platform API — tenant management and frontend
+description: Tenant management stack — API server, frontend, pipeline observability, gatekeeper, auth/IdP
 version: 0.0.0

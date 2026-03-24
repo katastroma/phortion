@@ -9,6 +9,7 @@ Helm chart that composes the tenant management stack for
 
 - **Auth/IdP** — specific solution TBD.
 - **Gatekeeper** — specific solution TBD.
+- **Grafana** — tenant-facing pipeline observability dashboards.
 
 ### Custom
 
