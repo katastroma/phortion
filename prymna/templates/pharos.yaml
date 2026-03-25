@@ -20,10 +20,14 @@ spec:
   selector:
     app.kubernetes.io/name: {{ .Values.pharos.name }}
   ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
     - name: grpc
       protocol: TCP
-      port: 9090
-      targetPort: 9090
+      port: 50051
+      targetPort: 50051
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,3 +52,39 @@ spec:
       containers:
         - name: coordinator
           image: {{ .Values.pharos.image.repository }}:{{ .Values.pharos.image.tag }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: grpc
+              containerPort: 50051
+              protocol: TCP
+          env:
+            - name: TEMPO_URL
+              value: {{ .Values.pharos.env.tempoURL | quote }}
+            - name: DETECTOR_INTERVAL
+              value: {{ .Values.pharos.env.detectorInterval | quote }}
+            - name: ORPHAN_AGE
+              value: {{ .Values.pharos.env.orphanAge | quote }}
+            - name: PORT
+              value: {{ .Values.pharos.env.port | quote }}
+            - name: GRPC_SERVER_ADDRESS
+              value: :50051
+            - name: OTEL_TRACES_EXPORTER
+              value: {{ .Values.pharos.env.otelTracesExporter | quote }}
+            - name: OTEL_METRICS_EXPORTER
+              value: {{ .Values.pharos.env.otelMetricsExporter | quote }}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: {{ .Values.pharos.env.otelExporterEndpoint | quote }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10

@@ -7,6 +7,14 @@ pharos:
   image:
     repository: ghcr.io/katastroma/pharos
     tag: ''
+  env:
+    tempoURL: http://prymna-tempo:3100
+    detectorInterval: 60s
+    orphanAge: 5m
+    port: '8080'
+    otelTracesExporter: otlp
+    otelMetricsExporter: otlp
+    otelExporterEndpoint: prymna-opentelemetry-collector:4317
 
 phortizo:
   name: phortizo
@@ -31,3 +39,62 @@ histia:
   image:
     repository: ghcr.io/katastroma/histia
     tag: ''
+
+tempo:
+  tempo:
+    storage:
+      trace:
+        backend: local
+        local:
+          path: /var/tempo/traces
+        wal:
+          path: /var/tempo/wal
+
+opentelemetry-collector:
+  mode: deployment
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+
+    connectors:
+      forward: {}
+
+    processors:
+      batch:
+        timeout: 5s
+        send_batch_size: 1024
+      tail_sampling:
+        decision_wait: 30s
+        num_traces: 100000
+        policies:
+          - name: error-traces
+            type: status_code
+            status_code:
+              status_codes:
+                - ERROR
+
+    exporters:
+      otlp/tempo:
+        endpoint: prymna-tempo:4317
+        tls:
+          insecure: true
+      otlp/pharos:
+        endpoint: pharos:50051
+        tls:
+          insecure: true
+
+    service:
+      pipelines:
+        traces/all:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp/tempo, forward]
+        traces/errors:
+          receivers: [forward]
+          processors: [tail_sampling, batch]
+          exporters: [otlp/pharos]

@@ -58,8 +58,8 @@ spec:
   ports:
     - name: grpc
       protocol: TCP
-      port: 9090
-      targetPort: 9090
+      port: 50051
+      targetPort: 50051
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -84,3 +84,14 @@ spec:
       containers:
         - name: provisioner
           image: {{ .Values.histia.image.repository }}:{{ .Values.histia.image.tag }}
+          ports:
+            - name: grpc
+              containerPort: 50051
+              protocol: TCP
+          env:
+            - name: OTEL_TRACES_EXPORTER
+              value: otlp
+            - name: OTEL_METRICS_EXPORTER
+              value: otlp
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: prymna-opentelemetry-collector:4317
