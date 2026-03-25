@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## prymna-0.1.1 - 2026-03-25
+#### Bug Fixes
+- (**prymna**) update chart with all current prymna dependencies - (a86dcf3) - Nathan Blair
+
+- - -
+
 ## prymna-0.1.0 - 2026-03-24
 #### Features
 - (**prymna**) update with new dependencies - (569024f) - Nathan Blair
