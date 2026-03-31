@@ -1,0 +1,4 @@
+apiVersion: v2
+name: test
+description: Minimal chart for e2e rendering verification
+version: 0.0.0
