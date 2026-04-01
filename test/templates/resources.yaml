@@ -34,3 +34,22 @@ kind: ServiceAccount
 metadata:
   name: {{ .Release.Name }}-sa
   namespace: {{ .Release.Name }}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ .Release.Name }}-mutating
+webhooks:
+  - name: mutate.{{ .Release.Name }}.io
+    clientConfig:
+      service:
+        name: {{ .Release.Name }}-svc
+        namespace: {{ .Release.Name }}
+        path: /mutate
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
